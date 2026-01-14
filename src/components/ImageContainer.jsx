@@ -19,7 +19,10 @@ const ImageContainer = ({ ref, ...props }) => {
     <div ref={ref} className="images-container">
       {images.map((src, index) => (
         <div key={index} className="img">
-          <img src={src} alt={`Portfolio image ${index + 1}`} />
+          <img
+            src={`${import.meta.env.BASE_URL}${src.substring(1)}`}
+            alt={`Portfolio image ${index + 1}`}
+          />
         </div>
       ))}
     </div>
