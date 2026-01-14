@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { Flip } from "gsap/Flip";
 import { SplitText } from "gsap/SplitText";
@@ -11,10 +11,12 @@ import TextContent from "./components/TextContent";
 import AboutSection from "./components/AboutSection";
 import WorkSection from "./components/WorkSection";
 import ContactSection from "./components/ContactSection";
+import { images } from "./data/images";
 
 gsap.registerPlugin(Flip, SplitText, ScrollTrigger);
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const imageContainerRef = useRef(null);
   const aboutRef = useRef(null);
   const workRef = useRef(null);
@@ -69,6 +71,8 @@ function App() {
   };
 
   useLayoutEffect(() => {
+    if (isLoading) return;
+
     // 1. Force manual scroll restoration immediately -> runs before painting
     if ("scrollRestoration" in history) {
       history.scrollRestoration = "manual";
@@ -82,9 +86,30 @@ function App() {
     // 3. Lock scroll immediately
     document.documentElement.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
+  }, [isLoading]);
+
+  useEffect(() => {
+    const preloadImages = async () => {
+      const loadPromises = images.map((src) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.src = `${import.meta.env.BASE_URL}${src.substring(1)}`;
+          img.onload = resolve;
+          img.onerror = resolve; // Resolve even on error to avoid hanging
+        });
+      });
+
+      await Promise.all(loadPromises);
+      // Add a small delay for smoother transition
+      setTimeout(() => setIsLoading(false), 500);
+    };
+
+    preloadImages();
   }, []);
 
   useEffect(() => {
+    if (isLoading) return;
+
     // Ensure we are at top again when effects run, just in case
     window.scrollTo(0, 0);
 
@@ -248,6 +273,7 @@ function App() {
         duration: 1,
         stagger: 0.5,
         ease: "power3.inOut",
+        delay: 0.5,
       });
 
       t1.to(
@@ -288,7 +314,26 @@ function App() {
       document.body.style.overflow = "auto";
       document.body.style.overflowX = "hidden";
     };
-  }, []);
+  }, [isLoading]);
+
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          height: "100vh",
+          width: "100vw",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#000",
+          color: "#fff",
+          fontFamily: "Inter, sans-serif",
+        }}
+      >
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <>
