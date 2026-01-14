@@ -1,8 +1,8 @@
-import { useRef, forwardRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { Flip } from "gsap/Flip";
 
-const ImageContainer = forwardRef((props, ref) => {
+const ImageContainer = ({ ref, ...props }) => {
   const images = [
     "/img-1.jpg",
     "/img-2.jpeg",
@@ -24,8 +24,6 @@ const ImageContainer = forwardRef((props, ref) => {
       ))}
     </div>
   );
-});
-
-ImageContainer.displayName = "ImageContainer";
+};
 
 export default ImageContainer;

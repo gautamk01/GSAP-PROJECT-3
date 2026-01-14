@@ -1,6 +1,4 @@
-import { forwardRef } from "react";
-
-const Sidebar = forwardRef((props, ref) => {
+const Sidebar = ({ ref, ...props }) => {
   return (
     <div ref={ref} className="sidebar">
       <div className="logo">
@@ -9,8 +7,6 @@ const Sidebar = forwardRef((props, ref) => {
       <div className="divider"></div>
     </div>
   );
-});
-
-Sidebar.displayName = "Sidebar";
+};
 
 export default Sidebar;

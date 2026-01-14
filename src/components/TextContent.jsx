@@ -1,7 +1,6 @@
-import { forwardRef } from "react";
 import { useTextSplit } from "../hooks/useTextSplit";
 
-const TextContent = forwardRef((props, ref) => {
+const TextContent = ({ ref, ...props }) => {
   const headerRef = useTextSplit("h1");
   const siteInfoRef = useTextSplit("h2, p");
   const footerRef = useTextSplit("h2");
@@ -29,8 +28,6 @@ const TextContent = forwardRef((props, ref) => {
       </div>
     </>
   );
-});
-
-TextContent.displayName = "TextContent";
+};
 
 export default TextContent;

@@ -1,6 +1,4 @@
-import { forwardRef } from "react";
-
-const WorkSection = forwardRef((props, ref) => {
+const WorkSection = ({ ref, ...props }) => {
   const projects = [
     { title: "E-Commerce", category: "Web Development", year: "2024" },
     { title: "Portfolio V1", category: "Design / Dev", year: "2023" },
@@ -27,8 +25,6 @@ const WorkSection = forwardRef((props, ref) => {
       </div>
     </section>
   );
-});
-
-WorkSection.displayName = "WorkSection";
+};
 
 export default WorkSection;

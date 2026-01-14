@@ -1,7 +1,6 @@
-import { forwardRef } from "react";
 import { useTextSplit } from "../hooks/useTextSplit";
 
-const Navigation = forwardRef((props, ref) => {
+const Navigation = ({ ref, ...props }) => {
   const textRef = useTextSplit("a, p");
 
   return (
@@ -29,8 +28,6 @@ const Navigation = forwardRef((props, ref) => {
       <div className="divider"></div>
     </nav>
   );
-});
-
-Navigation.displayName = "Navigation";
+};
 
 export default Navigation;

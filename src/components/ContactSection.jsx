@@ -1,6 +1,4 @@
-import { forwardRef } from "react";
-
-const ContactSection = forwardRef((props, ref) => {
+const ContactSection = ({ ref, ...props }) => {
   return (
     <section ref={ref} className="contact-section">
       <div className="contact-header">
@@ -38,8 +36,6 @@ const ContactSection = forwardRef((props, ref) => {
       </div>
     </section>
   );
-});
-
-ContactSection.displayName = "ContactSection";
+};
 
 export default ContactSection;

@@ -1,6 +1,4 @@
-import { forwardRef } from "react";
-
-const AboutSection = forwardRef((props, ref) => {
+const AboutSection = ({ ref, ...props }) => {
   return (
     <section ref={ref} className="about-section">
       <div className="about-container">
@@ -28,8 +26,6 @@ const AboutSection = forwardRef((props, ref) => {
       </div>
     </section>
   );
-});
-
-AboutSection.displayName = "AboutSection";
+};
 
 export default AboutSection;

@@ -121,8 +121,8 @@ function App() {
             },
             y: 100,
             opacity: 0,
-            stagger: 0.02,
-            duration: 1,
+            stagger: 0.005,
+            duration: 0.8,
             ease: "power4.out",
           });
 
