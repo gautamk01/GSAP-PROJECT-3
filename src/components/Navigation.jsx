@@ -1,19 +1,8 @@
-import { useTextSplit } from "../hooks/useTextSplit";
-
-const Navigation = ({ ref, ...props }) => {
-  const textRef = useTextSplit("a, p");
-
+const Navigation = () => {
   return (
-    <nav
-      ref={(node) => {
-        // Handle both refs (forwarded ref and internal textRef)
-        if (typeof ref === "function") ref(node);
-        else if (ref) ref.current = node;
-        textRef.current = node;
-      }}
-    >
+    <nav>
       <div className="logo-name">
-        <a href="#">GK</a>
+        <a href="#">Gautam Krishna M</a>
       </div>
       <div className="nav-items">
         <div className="links">

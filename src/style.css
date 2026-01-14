@@ -314,6 +314,16 @@ nav .divider {
   left: 7.5rem;
 }
 
+/* Hide text initially until animation setup is complete */
+.header,
+.site-info,
+.hero-footer,
+.logo-name,
+.links,
+.cta {
+  opacity: 0;
+}
+
 .line {
   overflow: hidden;
 }

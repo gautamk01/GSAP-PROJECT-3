@@ -215,6 +215,45 @@ function App() {
         },
       });
 
+      // Split text for hero section
+      const headerSplit = new SplitText(".header h1", {
+        type: "lines",
+        linesClass: "line",
+      });
+      const siteInfoSplit = new SplitText(".site-info h2, .site-info p", {
+        type: "lines",
+        linesClass: "line",
+      });
+      const footerSplit = new SplitText(".hero-footer h2", {
+        type: "lines",
+        linesClass: "line",
+      });
+
+      // Wrap each line with a span for animation
+      [
+        ...headerSplit.lines,
+        ...siteInfoSplit.lines,
+        ...footerSplit.lines,
+      ].forEach((line) => {
+        const textContent = line.textContent;
+        line.innerHTML = `<span>${textContent}</span>`;
+      });
+
+      // Split text for navigation
+      const navLinks = document.querySelectorAll(
+        ".logo-name a, .links a, .links p, .cta a"
+      );
+      navLinks.forEach((link) => {
+        const textContent = link.textContent;
+        link.innerHTML = `<span>${textContent}</span>`;
+      });
+
+      // Reveal hero text containers now that spans are in place
+      // Keep navbar hidden until its animation
+      gsap.set([".header", ".site-info", ".hero-footer"], {
+        opacity: 1,
+      });
+
       gsap.set(".img", { scale: 0 });
       gsap.set(
         [".logo-name a span", ".links a span, .links p span", ".cta a span"],
@@ -286,18 +325,24 @@ function App() {
         "<"
       );
 
+      t1.to([".header span", ".site-info span", ".hero-footer span"], {
+        y: "0%",
+        duration: 1,
+        stagger: 0.1,
+        ease: "power4.out",
+      });
+
       t1.to(
-        [".logo-name a span", ".links a span, .links p span", ".cta a span"],
+        [".logo-name", ".links", ".cta"],
         {
-          y: "0%",
-          duration: 1,
-          stagger: 0.1,
-          ease: "power4.out",
-        }
+          autoAlpha: 1,
+          duration: 0,
+        },
+        "<"
       );
 
       t1.to(
-        [".header span", ".site-info span", ".hero-footer span"],
+        [".logo-name a span", ".links a span, .links p span", ".cta a span"],
         {
           y: "0%",
           duration: 1,

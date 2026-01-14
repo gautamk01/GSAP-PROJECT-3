@@ -1,17 +1,11 @@
-import { useTextSplit } from "../hooks/useTextSplit";
-
-const TextContent = ({ ref, ...props }) => {
-  const headerRef = useTextSplit("h1");
-  const siteInfoRef = useTextSplit("h2, p");
-  const footerRef = useTextSplit("h2");
-
+const TextContent = () => {
   return (
     <>
-      <div ref={headerRef} className="header">
+      <div className="header">
         <h1>Full Stack Developer & Software Engineer</h1>
       </div>
 
-      <div ref={siteInfoRef} className="site-info">
+      <div className="site-info">
         <h2>
           Computer Science graduate specializing in web development, algorithms,
           and system design
@@ -23,7 +17,7 @@ const TextContent = ({ ref, ...props }) => {
         </div>
       </div>
 
-      <div ref={footerRef} className="hero-footer">
+      <div className="hero-footer">
         <h2>View My Work</h2>
       </div>
     </>
